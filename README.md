@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery Ảnh Dìm - Quản lý ảnh bạn bè</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #4361ee;
@@ -19,6 +20,7 @@
             --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             --radius: 16px;
             --transition: all 0.3s ease;
+            --sparkle: #fffacd;
         }
 
         .dark-mode {
@@ -31,13 +33,14 @@
             --gray: #a0a0a0;
             --card-bg: #1e1e1e;
             --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --sparkle: #ffd700;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
@@ -46,6 +49,7 @@
             min-height: 100vh;
             padding: 20px;
             transition: var(--transition);
+            overflow-x: hidden;
         }
 
         .dark-mode body {
@@ -57,6 +61,32 @@
             margin: 0 auto;
         }
 
+        /* Hiệu ứng lấp lánh nền */
+        .sparkle-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--sparkle);
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px var(--sparkle);
+            animation: sparkle 5s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
         header {
             display: flex;
             justify-content: space-between;
@@ -66,6 +96,25 @@
             background: var(--card-bg);
             border-radius: var(--radius);
             box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
         .logo {
@@ -77,6 +126,14 @@
         .logo i {
             font-size: 2.5rem;
             color: var(--primary);
+            filter: drop-shadow(0 0 5px rgba(67, 97, 238, 0.5));
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
         .logo h1 {
@@ -86,6 +143,7 @@
             background-clip: text;
             color: transparent;
             font-weight: 700;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .controls {
@@ -104,6 +162,23 @@
             gap: 8px;
             transition: var(--transition);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: var(--transition);
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn-primary {
@@ -114,6 +189,7 @@
         .btn-primary:hover {
             background: var(--primary-dark);
             transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
         }
 
         .btn-secondary {
@@ -124,6 +200,7 @@
         .btn-secondary:hover {
             background: #5a08a0;
             transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(114, 9, 183, 0.4);
         }
 
         .btn-accent {
@@ -134,6 +211,7 @@
         .btn-accent:hover {
             background: #e11574;
             transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(247, 37, 133, 0.4);
         }
 
         .btn-outline {
@@ -145,6 +223,10 @@
         .btn-outline:hover {
             background: var(--dark);
             color: var(--light);
+        }
+
+        .btn i {
+            filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.2));
         }
 
         .main-content {
@@ -159,6 +241,20 @@
             padding: 25px;
             box-shadow: var(--shadow);
             height: fit-content;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sidebar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            opacity: 0.1;
+            border-radius: 50%;
         }
 
         .section-title {
@@ -172,6 +268,7 @@
 
         .section-title i {
             font-size: 1.5rem;
+            filter: drop-shadow(0 0 5px rgba(67, 97, 238, 0.3));
         }
 
         .form-group {
@@ -242,6 +339,20 @@
             border-radius: var(--radius);
             padding: 25px;
             box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content::before {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+            opacity: 0.1;
+            border-radius: 50%;
         }
 
         .search-container {
@@ -261,6 +372,7 @@
             top: 50%;
             transform: translateY(-50%);
             color: var(--gray);
+            z-index: 2;
         }
 
         .search-box input {
@@ -272,6 +384,8 @@
             transition: var(--transition);
             background: var(--light);
             color: var(--dark);
+            position: relative;
+            z-index: 1;
         }
 
         .search-box input:focus {
@@ -293,11 +407,17 @@
             transition: var(--transition);
             border-bottom: 3px solid transparent;
             color: var(--gray);
+            position: relative;
         }
 
         .tab.active {
             color: var(--primary);
             border-bottom: 3px solid var(--primary);
+        }
+
+        .tab i {
+            margin-right: 8px;
+            filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.1));
         }
 
         .friend-list {
@@ -315,6 +435,19 @@
             transition: var(--transition);
             cursor: pointer;
             text-align: center;
+            position: relative;
+        }
+
+        .friend-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(67,97,238,0.1) 0%, rgba(247,37,133,0.1) 100%);
+            opacity: 0;
+            transition: var(--transition);
         }
 
         .friend-card:hover {
@@ -322,15 +455,23 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
 
+        .friend-card:hover::before {
+            opacity: 1;
+        }
+
         .friend-avatar {
             width: 100%;
             height: 140px;
             object-fit: cover;
             border-bottom: 3px solid var(--primary);
+            position: relative;
+            z-index: 1;
         }
 
         .friend-info {
             padding: 15px;
+            position: relative;
+            z-index: 1;
         }
 
         .friend-name {
@@ -419,12 +560,14 @@
             text-align: center;
             padding: 60px 20px;
             color: var(--gray);
+            grid-column: 1 / -1;
         }
 
         .empty-state i {
             font-size: 4rem;
             margin-bottom: 20px;
             color: #e0e0e0;
+            filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.1));
         }
 
         .empty-state h3 {
@@ -445,6 +588,24 @@
             padding: 20px;
             text-align: center;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
         }
 
         .stat-value {
@@ -452,6 +613,7 @@
             font-weight: 700;
             color: var(--primary);
             margin-bottom: 5px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .stat-label {
@@ -480,6 +642,12 @@
             overflow: hidden;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             position: relative;
+            animation: zoomIn 0.3s ease;
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
         .modal img {
@@ -505,6 +673,7 @@
             font-size: 1.2rem;
             transition: var(--transition);
             backdrop-filter: blur(10px);
+            z-index: 10;
         }
 
         .modal-close:hover {
@@ -533,6 +702,10 @@
         .toast.show {
             transform: translateY(0);
             opacity: 1;
+        }
+
+        .toast i {
+            filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.2));
         }
 
         @media (max-width: 1100px) {
@@ -570,6 +743,9 @@
     </style>
 </head>
 <body>
+    <!-- Hiệu ứng lấp lánh nền -->
+    <div class="sparkle-bg" id="sparkleBg"></div>
+
     <div class="container">
         <header>
             <div class="logo">
@@ -641,8 +817,12 @@
                 </div>
                 
                 <div class="tabs">
-                    <div class="tab active" data-tab="friends">Danh sách bạn bè</div>
-                    <div class="tab" data-tab="gallery">Thư viện ảnh</div>
+                    <div class="tab active" data-tab="friends">
+                        <i class="fas fa-users"></i> Danh sách bạn bè
+                    </div>
+                    <div class="tab" data-tab="gallery">
+                        <i class="fas fa-images"></i> Thư viện ảnh
+                    </div>
                 </div>
                 
                 <div id="friendsTab" class="tab-content">
@@ -677,6 +857,32 @@
     </div>
 
     <script>
+        // Tạo hiệu ứng lấp lánh
+        function createSparkles() {
+            const sparkleBg = document.getElementById('sparkleBg');
+            const sparkleCount = 50;
+            
+            for (let i = 0; i < sparkleCount; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                
+                // Vị trí ngẫu nhiên
+                sparkle.style.left = `${Math.random() * 100}%`;
+                sparkle.style.top = `${Math.random() * 100}%`;
+                
+                // Kích thước ngẫu nhiên
+                const size = Math.random() * 3 + 2;
+                sparkle.style.width = `${size}px`;
+                sparkle.style.height = `${size}px`;
+                
+                // Thời gian animation ngẫu nhiên
+                sparkle.style.animationDelay = `${Math.random() * 5}s`;
+                sparkle.style.animationDuration = `${Math.random() * 3 + 3}s`;
+                
+                sparkleBg.appendChild(sparkle);
+            }
+        }
+
         // Lưu trữ dữ liệu bạn bè và ảnh
         let friendsData = JSON.parse(localStorage.getItem('friendsData')) || {};
         
@@ -702,6 +908,7 @@
         
         // Khởi tạo
         document.addEventListener('DOMContentLoaded', function() {
+            createSparkles();
             displayFriends();
             updateStats();
             
@@ -749,7 +956,7 @@
             
             if (Object.keys(friendsData).length === 0) {
                 friendList.innerHTML = `
-                    <div class="empty-state" style="grid-column: 1 / -1;">
+                    <div class="empty-state">
                         <i class="fas fa-users"></i>
                         <h3>Chưa có bạn bè nào</h3>
                         <p>Thêm bạn bè và ảnh dìm để bắt đầu</p>
@@ -871,7 +1078,7 @@
                 });
             } else {
                 imageGallery.innerHTML = `
-                    <div class="empty-state" style="grid-column: 1 / -1;">
+                    <div class="empty-state">
                         <i class="fas fa-images"></i>
                         <h3>Không có ảnh nào</h3>
                         <p>${friendName} chưa có ảnh dìm nào</p>
