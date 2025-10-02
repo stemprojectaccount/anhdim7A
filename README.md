@@ -21,6 +21,7 @@
             --radius: 16px;
             --transition: all 0.3s ease;
             --sparkle: #fffacd;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
         }
 
         .dark-mode {
@@ -85,6 +86,43 @@
         @keyframes sparkle {
             0%, 100% { opacity: 0; }
             50% { opacity: 1; }
+        }
+
+        /* Hiệu ứng hạt nền */
+        .particles-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -2;
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
         }
 
         header {
@@ -708,6 +746,210 @@
             filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.2));
         }
 
+        /* Nâng cấp mới - Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 20px rgba(247, 37, 133, 0.4);
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 100;
+        }
+
+        .fab:hover {
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 8px 25px rgba(247, 37, 133, 0.6);
+        }
+
+        /* Nâng cấp mới - Icon Grid */
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+            padding: 20px;
+            background: var(--light);
+            border-radius: var(--radius);
+        }
+
+        .icon-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px 10px;
+            border-radius: 10px;
+            transition: var(--transition);
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .icon-item:hover {
+            background: rgba(67, 97, 238, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .icon-item i {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+
+        .icon-item span {
+            font-size: 0.7rem;
+            color: var(--gray);
+        }
+
+        /* Nâng cấp mới - Animation Section */
+        .animation-section {
+            margin: 30px 0;
+            padding: 25px;
+            background: var(--light);
+            border-radius: var(--radius);
+            text-align: center;
+        }
+
+        .animation-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .animation-box {
+            width: 100px;
+            height: 100px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            background: var(--gradient);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .animation-1 {
+            animation: bounce 2s infinite;
+        }
+
+        .animation-2 {
+            animation: spin 3s infinite linear;
+        }
+
+        .animation-3 {
+            animation: pulse 1.5s infinite;
+        }
+
+        .animation-4 {
+            animation: shake 1s infinite;
+        }
+
+        .animation-5 {
+            animation: flip 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg); }
+            75% { transform: rotate(10deg); }
+        }
+
+        @keyframes flip {
+            0%, 100% { transform: rotateY(0deg); }
+            50% { transform: rotateY(180deg); }
+        }
+
+        /* Nâng cấp mới - Progress Bar */
+        .progress-container {
+            margin: 20px 0;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient);
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+
+        /* Nâng cấp mới - Tooltip */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: var(--dark);
+            color: var(--light);
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.8rem;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Nâng cấp mới - Notification Badge */
+        .badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
         @media (max-width: 1100px) {
             .main-content {
                 grid-template-columns: 1fr;
@@ -739,12 +981,25 @@
             .search-container {
                 flex-direction: column;
             }
+            
+            .animation-container {
+                gap: 10px;
+            }
+            
+            .animation-box {
+                width: 80px;
+                height: 80px;
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Hiệu ứng lấp lánh nền -->
     <div class="sparkle-bg" id="sparkleBg"></div>
+    
+    <!-- Hiệu ứng hạt nền -->
+    <div class="particles-bg" id="particlesBg"></div>
 
     <div class="container">
         <header>
@@ -803,6 +1058,64 @@
                         <div class="stat-label">Bộ nhớ</div>
                     </div>
                 </div>
+                
+                <!-- Nâng cấp mới - Icon Grid -->
+                <div class="section-title">
+                    <i class="fas fa-icons"></i>
+                    <h2>Icon Phổ Biến</h2>
+                </div>
+                
+                <div class="icon-grid">
+                    <div class="icon-item">
+                        <i class="fas fa-user-friends"></i>
+                        <span>Bạn bè</span>
+                    </div>
+                    <div class="icon-item">
+                        <i class="fas fa-camera"></i>
+                        <span>Máy ảnh</span>
+                    </div>
+                    <div class="icon-item">
+                        <i class="fas fa-heart"></i>
+                        <span>Yêu thích</span>
+                    </div>
+                    <div class="icon-item">
+                        <i class="fas fa-star"></i>
+                        <span>Nổi bật</span>
+                    </div>
+                    <div class="icon-item">
+                        <i class="fas fa-image"></i>
+                        <span>Hình ảnh</span>
+                    </div>
+                    <div class="icon-item">
+                        <i class="fas fa-smile"></i>
+                        <span>Cảm xúc</span>
+                    </div>
+                    <div class="icon-item">
+                        <i class="fas fa-tags"></i>
+                        <span>Thẻ</span>
+                    </div>
+                    <div class="icon-item">
+                        <i class="fas fa-share-alt"></i>
+                        <span>Chia sẻ</span>
+                    </div>
+                </div>
+                
+                <!-- Nâng cấp mới - Progress Bar -->
+                <div class="section-title">
+                    <i class="fas fa-chart-bar"></i>
+                    <h2>Thống kê sử dụng</h2>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="storageProgress" style="width: 24%"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 5px;">
+                        <span>0%</span>
+                        <span>Bộ nhớ đã dùng</span>
+                        <span>100%</span>
+                    </div>
+                </div>
             </div>
 
             <div class="content">
@@ -823,6 +1136,9 @@
                     <div class="tab" data-tab="gallery">
                         <i class="fas fa-images"></i> Thư viện ảnh
                     </div>
+                    <div class="tab" data-tab="animations">
+                        <i class="fas fa-play-circle"></i> Hiệu ứng
+                    </div>
                 </div>
                 
                 <div id="friendsTab" class="tab-content">
@@ -836,8 +1152,83 @@
                         <!-- Gallery images will be generated here -->
                     </div>
                 </div>
+                
+                <!-- Nâng cấp mới - Animation Section -->
+                <div id="animationsTab" class="tab-content" style="display: none;">
+                    <div class="animation-section">
+                        <h2>Hiệu Ứng Icon FontAwesome</h2>
+                        <p>Khám phá các hiệu ứng animation đẹp mắt với FontAwesome</p>
+                        
+                        <div class="animation-container">
+                            <div class="animation-box animation-1">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="animation-box animation-2">
+                                <i class="fas fa-cog"></i>
+                            </div>
+                            <div class="animation-box animation-3">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            <div class="animation-box animation-4">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="animation-box animation-5">
+                                <i class="fas fa-comment"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="icon-grid" style="margin-top: 30px;">
+                            <div class="icon-item tooltip">
+                                <i class="fas fa-dog"></i>
+                                <span>Chó</span>
+                                <span class="tooltiptext">Icon chó</span>
+                            </div>
+                            <div class="icon-item tooltip">
+                                <i class="fas fa-cat"></i>
+                                <span>Mèo</span>
+                                <span class="tooltiptext">Icon mèo</span>
+                            </div>
+                            <div class="icon-item tooltip">
+                                <i class="fas fa-dove"></i>
+                                <span>Chim</span>
+                                <span class="tooltiptext">Icon chim</span>
+                            </div>
+                            <div class="icon-item tooltip">
+                                <i class="fas fa-fish"></i>
+                                <span>Cá</span>
+                                <span class="tooltiptext">Icon cá</span>
+                            </div>
+                            <div class="icon-item tooltip">
+                                <i class="fas fa-hippo"></i>
+                                <span>Hà mã</span>
+                                <span class="tooltiptext">Icon hà mã</span>
+                            </div>
+                            <div class="icon-item tooltip">
+                                <i class="fas fa-horse"></i>
+                                <span>Ngựa</span>
+                                <span class="tooltiptext">Icon ngựa</span>
+                            </div>
+                            <div class="icon-item tooltip">
+                                <i class="fas fa-kiwi-bird"></i>
+                                <span>Chim Kiwi</span>
+                                <span class="tooltiptext">Icon chim kiwi</span>
+                            </div>
+                            <div class="icon-item tooltip">
+                                <i class="fas fa-otter"></i>
+                                <span>Rái cá</span>
+                                <span class="tooltiptext">Icon rái cá</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
+
+    <!-- Nâng cấp mới - Floating Action Button -->
+    <div class="fab tooltip" id="quickAddBtn">
+        <i class="fas fa-plus"></i>
+        <span class="tooltiptext">Thêm nhanh</span>
     </div>
 
     <!-- Image Modal -->
@@ -883,6 +1274,31 @@
             }
         }
 
+        // Tạo hiệu ứng hạt nền
+        function createParticles() {
+            const particlesBg = document.getElementById('particlesBg');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Vị trí ngẫu nhiên
+                particle.style.left = `${Math.random() * 100}%`;
+                
+                // Kích thước ngẫu nhiên
+                const size = Math.random() * 4 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Thời gian animation ngẫu nhiên
+                particle.style.animationDelay = `${Math.random() * 15}s`;
+                particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
+                
+                particlesBg.appendChild(particle);
+            }
+        }
+
         // Lưu trữ dữ liệu bạn bè và ảnh
         let friendsData = JSON.parse(localStorage.getItem('friendsData')) || {};
         
@@ -905,10 +1321,13 @@
         const totalFriendsEl = document.getElementById('totalFriends');
         const totalImagesEl = document.getElementById('totalImages');
         const storageUsedEl = document.getElementById('storageUsed');
+        const storageProgress = document.getElementById('storageProgress');
+        const quickAddBtn = document.getElementById('quickAddBtn');
         
         // Khởi tạo
         document.addEventListener('DOMContentLoaded', function() {
             createSparkles();
+            createParticles();
             displayFriends();
             updateStats();
             
@@ -1110,6 +1529,7 @@
             // Tính % bộ nhớ sử dụng (giả lập)
             const storageUsed = Math.min(100, Math.round(totalImages / 5));
             storageUsedEl.textContent = `${storageUsed}%`;
+            storageProgress.style.width = `${storageUsed}%`;
         }
         
         // Hiển thị thông báo
@@ -1200,6 +1620,12 @@
             if (e.target === imageModal) {
                 imageModal.style.display = 'none';
             }
+        });
+        
+        // Sự kiện nút thêm nhanh
+        quickAddBtn.addEventListener('click', () => {
+            friendNameInput.focus();
+            showToast('Nhập tên bạn và chọn ảnh để thêm nhanh!');
         });
         
         // Tạo dữ liệu mẫu nếu chưa có
